@@ -16,7 +16,19 @@ AShip::AShip()
 void AShip::BeginPlay()
 {
 	Super::BeginPlay();
+	InputComp = GetWorld()->GetFirstPlayerController()->GetPawn()->FindComponentByClass<UInputComponent>();
+
+	if (InputComp) {
+		InputComp->BindAction(FName(TEXT("Accelerator")), EInputEvent::IE_Repeat, this, &AShip::SpeedUp);
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("Input component not found"));
+	}
 	
+//	AActor* Act = GetWorld()->GetFirstPlayerController->GetPawn();
+
+//	UE_LOG(LogTemp, Warning, TEXT("Actor name: %s"), *GetOwner()->GetName());
+
 }
 
 // Called every frame
@@ -31,5 +43,20 @@ void AShip::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AShip::SpeedUp()
+{
+	ShipSpeedUp += 1.f;
+
+	UE_LOG(LogTemp, Warning, TEXT("Speed Up %f"), ShipSpeedUp);
+
+}
+
+void AShip::Fly()
+{
+	AActor* Act = GetWorld()->GetFirstPlayerController()->GetPawn();
+	ShipLocation += FVector(ShipSpeedUp, 0, 0);
+	Act->SetActorLocation(ShipLocation);
 }
 
