@@ -25,15 +25,14 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void SpeedUp();
+	void SpeedDown();
+
 private:
 
-	UInputComponent* InputComp = nullptr;
 	FVector ShipLocation;
 
 	float ShipSpeedUp = 0.f;
-
-	void SpeedUp();
-
 	void Fly();
 
 
