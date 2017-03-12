@@ -78,8 +78,7 @@ void AShip::ThrustPitchActivate(float val)
 
 void AShip::ThrustEngineActivate(float val)
 {
-	//RootDirectionArrow->GetForwardVector()
-	
+	ShipMainSM->AddImpulse(RootDirectionArrow->GetForwardVector() * EnginePower * val);
 }
 
 void AShip::SetupEngines()
@@ -113,16 +112,13 @@ void AShip::SetupEngines()
 	if (!RootDirectionArrow) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP SHIP ROOT DIRECTION ARROW NAME: RootDirectionArrow")); }
 
 	// Find Main Static Mesh (MainSM)
-
 	TArray<UActorComponent*> Mesh;
-	Arrows = this->GetComponentsByTag(UStaticMeshComponent::StaticClass(), FName("NameMesh"));
+	Mesh = this->GetComponentsByTag(UActorComponent::StaticClass(), FName("MainSM"));
 	for (auto &mes : Mesh) {
 		FString NameMesh = mes->GetName();
-		if (NameMesh.Contains(TEXT("MainSM"))) { ShipMainSM = Cast<UStaticMeshComponent>(mes); }
-		UE_LOG(LogTemp, Warning, TEXT("Find Component: %s"), *NameMesh);
+		if (NameMesh.Contains(TEXT("Ship"))) { ShipMainSM = Cast<UStaticMeshComponent>(mes); }
 	}
 	if (!ShipMainSM) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP MAIN STATIC MESH COMPONENT: MainSM")); }
-
 
 }
 
