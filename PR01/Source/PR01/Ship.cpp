@@ -16,7 +16,7 @@ void AShip::BeginPlay()
 {
 	Super::BeginPlay();
 
-	SetupThrusters();
+	SetupEngines();
 }
 
 // Called every frame
@@ -36,33 +36,56 @@ void AShip::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AShip::ThrustRollActivate(float val)
 {
-	RightWingRollThrust->Activate(true);
-	LeftWingRollThrust->Activate(true);
-	RightWingRollThrust->ThrustStrength = ThrustRollStrength * val;
-	LeftWingRollThrust->ThrustStrength = ThrustRollStrength * val;
+	if (val) {
+		RightWingRollThrust->Activate(true);
+		LeftWingRollThrust->Activate(true);
+		RightWingRollThrust->ThrustStrength = ThrustRollStrength * val;
+		LeftWingRollThrust->ThrustStrength = ThrustRollStrength * val;
+	}
+	else {
+		RightWingRollThrust->Deactivate();
+		LeftWingRollThrust->Deactivate();
+	}
 }
 
 void AShip::ThrustYawActivate(float val)
 {
-	NoseYawThrust->Activate(true);
-	TailYawThrust->Activate(true);
-	NoseYawThrust->ThrustStrength = ThrustYawStrength * val;
-	TailYawThrust->ThrustStrength = ThrustYawStrength * val;
-	
+	if (val) {
+		NoseYawThrust->Activate(true);
+		TailYawThrust->Activate(true);
+		NoseYawThrust->ThrustStrength = ThrustYawStrength * val;
+		TailYawThrust->ThrustStrength = ThrustYawStrength * val;
+	}
+	else {
+		NoseYawThrust->Deactivate();
+		TailYawThrust->Deactivate();
+	}
 }
 
 void AShip::ThrustPitchActivate(float val)
 {
-	NosePitchThrust->Activate(true);
-	TailPitchThrust->Activate(true);
-	NosePitchThrust->ThrustStrength = ThrustPitchStrength * val;
-	TailPitchThrust->ThrustStrength = ThrustPitchStrength * val;
+	if (val) {
+		NosePitchThrust->Activate(true);
+		TailPitchThrust->Activate(true);
+		NosePitchThrust->ThrustStrength = ThrustPitchStrength * val;
+		TailPitchThrust->ThrustStrength = ThrustPitchStrength * val;
+	}
+	else {
+		NosePitchThrust->Deactivate();
+		TailPitchThrust->Deactivate();
+	}
 }
 
-void AShip::SetupThrusters()
+void AShip::ThrustEngineActivate(float val)
 {
+	//RootDirectionArrow->GetForwardVector()
+	
+}
+
+void AShip::SetupEngines()
+{
+	//	Find Thruster Engine And Setup
 	TArray<UActorComponent*> Thrusters;
-	//	Thrusters = 
 	Thrusters = this->GetComponentsByTag(UActorComponent::StaticClass(), FName("Thruster"));
 	for (auto &thr : Thrusters) {
 		FString NameThruster = thr->GetName();
@@ -72,9 +95,6 @@ void AShip::SetupThrusters()
 		if (NameThruster.Contains(TEXT("NoseYawThrust"))) { NoseYawThrust = Cast<UPhysicsThrusterComponent>(thr); }
 		if (NameThruster.Contains(TEXT("TailPitchThrust"))) { TailPitchThrust = Cast<UPhysicsThrusterComponent>(thr); }
 		if (NameThruster.Contains(TEXT("TailYawThrust"))) { TailYawThrust = Cast<UPhysicsThrusterComponent>(thr); }
-		//LeftThruster->ThrustStrength = 15;
-		//LeftThruster->ThrustStrength = 10000;
-		UE_LOG(LogTemp, Warning, TEXT("Find Thrastor %s"), *thr->GetName());
 	}
 	if (!RightWingRollThrust) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP SHIP THRUSTER NAME: RightWingRollThrust"));}
 	if (!LeftWingRollThrust) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP SHIP THRUSTER NAME: LeftWingRollThrust")); }
@@ -82,6 +102,27 @@ void AShip::SetupThrusters()
 	if (!NoseYawThrust) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP SHIP THRUSTER NAME: NoseYawThrust")); }
 	if (!TailPitchThrust) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP SHIP THRUSTER NAME: TailPitchThrust")); }
 	if (!TailYawThrust) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP SHIP THRUSTER NAME: TailYawThrust")); }
+
+	//	Find Arrow Root Direction
+	TArray<UActorComponent*> Arrows;
+	Arrows = this->GetComponentsByTag(UActorComponent::StaticClass(), FName("RootDirectionArrow"));
+	for (auto &arw : Arrows) {
+		FString NameArrowsr = arw->GetName();
+		if (NameArrowsr.Contains(TEXT("RootDirectionArrow"))) { RootDirectionArrow = Cast<UArrowComponent>(arw); }
+	}
+	if (!RootDirectionArrow) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP SHIP ROOT DIRECTION ARROW NAME: RootDirectionArrow")); }
+
+	// Find Main Static Mesh (MainSM)
+
+	TArray<UActorComponent*> Mesh;
+	Arrows = this->GetComponentsByTag(UStaticMeshComponent::StaticClass(), FName("NameMesh"));
+	for (auto &mes : Mesh) {
+		FString NameMesh = mes->GetName();
+		if (NameMesh.Contains(TEXT("MainSM"))) { ShipMainSM = Cast<UStaticMeshComponent>(mes); }
+		UE_LOG(LogTemp, Warning, TEXT("Find Component: %s"), *NameMesh);
+	}
+	if (!ShipMainSM) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP MAIN STATIC MESH COMPONENT: MainSM")); }
+
 
 }
 

@@ -19,6 +19,8 @@ void AShipPlayerController::BeginPlay()
 		InputComp->BindAxis(FName(TEXT("AimRoll")), this, &AShipPlayerController::AimThrustRoll);
 		InputComp->BindAxis(FName(TEXT("AimYaw")), this, &AShipPlayerController::AimThrustYaw);
 		InputComp->BindAxis(FName(TEXT("AimPitch")), this, &AShipPlayerController::AimThrustPitch);
+		InputComp->BindAxis(FName(TEXT("AimEngineThrust")), this, &AShipPlayerController::AimEngineThrust);
+
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Input component not found"));
@@ -51,5 +53,10 @@ void AShipPlayerController::AimThrustYaw(float val)
 void AShipPlayerController::AimThrustPitch(float val)
 {
 	GetPlayerShip()->ThrustPitchActivate(val);
+}
+
+void AShipPlayerController::AimEngineThrust(float val)
+{
+	GetPlayerShip()->ThrustEngineActivate(val);
 }
 

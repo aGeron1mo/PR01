@@ -31,6 +31,7 @@ public:
 	void ThrustRollActivate(float val);
 	void ThrustYawActivate(float val);
 	void ThrustPitchActivate(float val);
+	void ThrustEngineActivate(float val);
 
 private:
 
@@ -40,15 +41,19 @@ private:
 		float ThrustYawStrength = 100000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
 		float ThrustPitchStrength = 100000;
-		
+	UPROPERTY(EditAnywhere, Category = "Ship Setup")
+		float EnginePower = 10000;
+
 	UPhysicsThrusterComponent* RightWingRollThrust = nullptr; 
 	UPhysicsThrusterComponent* LeftWingRollThrust = nullptr; 
 	UPhysicsThrusterComponent* NosePitchThrust = nullptr; 
 	UPhysicsThrusterComponent* NoseYawThrust = nullptr;
 	UPhysicsThrusterComponent* TailPitchThrust = nullptr;
 	UPhysicsThrusterComponent* TailYawThrust = nullptr;
+	UArrowComponent* RootDirectionArrow = nullptr;
+	UStaticMeshComponent* ShipMainSM = nullptr;
 
-	void SetupThrusters();
+	void SetupEngines();
 	
 	FVector ShipLocation;
 	void Fly();
