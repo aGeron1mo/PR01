@@ -19,8 +19,8 @@ public:
 	// Sets default values for this pawn's properties
 	AShip();
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ship Setup")
-		class UPhysicsThrusterComponent* ThrusterTEMP;
+//	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ship")
+//		class UPhysicsThrusterComponent* ThrusterTEMP;
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -28,23 +28,29 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	void SpeedUp();
-	void SpeedDown();
-	void ThrustRightWindRollActivate();
-	void ThrustLeftWindRollActivate();
+	void ThrustRollActivate(float val);
+	void ThrustYawActivate(float val);
+	void ThrustPitchActivate(float val);
 
 private:
 
-	// Сила движков для ROLL (На крыльях корабля)
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
 		float ThrustRollStrength = 100000;
+	UPROPERTY(EditAnywhere, Category = "Ship Setup")
+		float ThrustYawStrength = 100000;
+	UPROPERTY(EditAnywhere, Category = "Ship Setup")
+		float ThrustPitchStrength = 100000;
+		
+	UPhysicsThrusterComponent* RightWingRollThrust = nullptr; 
+	UPhysicsThrusterComponent* LeftWingRollThrust = nullptr; 
+	UPhysicsThrusterComponent* NosePitchThrust = nullptr; 
+	UPhysicsThrusterComponent* NoseYawThrust = nullptr;
+	UPhysicsThrusterComponent* TailPitchThrust = nullptr;
+	UPhysicsThrusterComponent* TailYawThrust = nullptr;
 
-	UActorComponent* RightThruster = nullptr; // Правый трастовый двигатель 
-	UPhysicsThrusterComponent* LeftThruster = nullptr; // Левый трастовый двигатель 
-
+	void SetupThrusters();
+	
 	FVector ShipLocation;
-
-	float ShipSpeedUp = 0.f;
 	void Fly();
 
 

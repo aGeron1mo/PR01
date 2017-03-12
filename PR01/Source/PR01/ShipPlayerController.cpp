@@ -13,21 +13,20 @@ AShip* AShipPlayerController::GetPlayerShip() const
 void AShipPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	InputComp = GetWorld()->GetFirstPlayerController()->GetPawn()->FindComponentByClass<UInputComponent>();
-
 	if (InputComp) {
-		InputComp->BindAction(FName(TEXT("Accelerator")), EInputEvent::IE_Pressed, this, &AShipPlayerController::AimAccelerate);
-		InputComp->BindAction(FName(TEXT("Decelerator")), EInputEvent::IE_Pressed, this, &AShipPlayerController::AimDecelerate);
+		InputComp->BindAxis(FName(TEXT("AimRoll")), this, &AShipPlayerController::AimThrustRoll);
+		InputComp->BindAxis(FName(TEXT("AimYaw")), this, &AShipPlayerController::AimThrustYaw);
+		InputComp->BindAxis(FName(TEXT("AimPitch")), this, &AShipPlayerController::AimThrustPitch);
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Input component not found"));
 	}
-
 	if (GetPlayerShip()) {
 		UE_LOG(LogTemp, Warning, TEXT("Get Player Ship %s"), *GetPlayerShip()->GetName());
-
 	}
+
 }
 
 // Called every frame
@@ -37,12 +36,20 @@ void AShipPlayerController::Tick(float DeltaTime)
 
 }
 
-void AShipPlayerController::AimAccelerate()
+
+void AShipPlayerController::AimThrustRoll(float val)
 {
-	GetPlayerShip()->SpeedUp();
+	GetPlayerShip()->ThrustRollActivate(val);
+
 }
 
-void AShipPlayerController::AimDecelerate()
+void AShipPlayerController::AimThrustYaw(float val)
 {
-	GetPlayerShip()->SpeedDown();
+	GetPlayerShip()->ThrustYawActivate(val);
 }
+
+void AShipPlayerController::AimThrustPitch(float val)
+{
+	GetPlayerShip()->ThrustPitchActivate(val);
+}
+

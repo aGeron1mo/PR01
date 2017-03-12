@@ -22,9 +22,9 @@ public:
 
 private:
 
-	void AimAccelerate();
-	void AimDecelerate();
-	void ThrustRoll();
+	void AimThrustRoll(float val);
+	void AimThrustYaw(float val);
+	void AimThrustPitch(float val);
 
 	UInputComponent* InputComp = nullptr;
 
