@@ -21,8 +21,10 @@ public:
 	virtual void Tick(float DeltaTime) override;	
 
 private:
+
 	void AimAccelerate();
 	void AimDecelerate();
+	void ThrustRoll();
 
 	UInputComponent* InputComp = nullptr;
 

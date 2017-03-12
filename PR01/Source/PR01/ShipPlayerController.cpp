@@ -17,8 +17,8 @@ void AShipPlayerController::BeginPlay()
 	InputComp = GetWorld()->GetFirstPlayerController()->GetPawn()->FindComponentByClass<UInputComponent>();
 
 	if (InputComp) {
-		InputComp->BindAction(FName(TEXT("Accelerator")), EInputEvent::IE_Repeat, this, &AShipPlayerController::AimAccelerate);
-		InputComp->BindAction(FName(TEXT("Decelerator")), EInputEvent::IE_Repeat, this, &AShipPlayerController::AimDecelerate);
+		InputComp->BindAction(FName(TEXT("Accelerator")), EInputEvent::IE_Pressed, this, &AShipPlayerController::AimAccelerate);
+		InputComp->BindAction(FName(TEXT("Decelerator")), EInputEvent::IE_Pressed, this, &AShipPlayerController::AimDecelerate);
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Input component not found"));

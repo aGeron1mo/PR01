@@ -10,16 +10,28 @@ AShip::AShip()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	//ThrusterTEMP = CreateDefaultSubobject<UPhysicsThrusterComponent>(TEXT(""));
 }
 
 // Called when the game starts or when spawned
 void AShip::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 	auto ShipName = GetName();
 	UE_LOG(LogTemp, Warning, TEXT("Actor name: %s"), *ShipName);
 
+	TArray<UActorComponent*> Thrusters;
+	//	Thrusters = 
+	Thrusters = this->GetComponentsByTag(UActorComponent::StaticClass(), FName("Thruster"));
+	for (auto &thr : Thrusters) {
+		RightThruster = thr;
+		LeftThruster = Cast<UPhysicsThrusterComponent>(thr);
+		//LeftThruster->ThrustStrength = 15;
+		LeftThruster->ThrustStrength = 10000;
+		UE_LOG(LogTemp, Warning, TEXT("Find Thrastor %s"), *LeftThruster->GetName());
+
+	}
 }
 
 // Called every frame
@@ -51,6 +63,14 @@ void AShip::SpeedDown()
 
 	UE_LOG(LogTemp, Warning, TEXT("Speed Down %f"), ShipSpeedUp);
 
+}
+
+void AShip::ThrustRightWindRollActivate()
+{
+}
+
+void AShip::ThrustLeftWindRollActivate()
+{
 }
 
 

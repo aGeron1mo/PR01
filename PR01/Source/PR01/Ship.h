@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "PhysicsEngine/PhysicsThrusterComponent.h"
 #include "GameFramework/Pawn.h"
 #include "Ship.generated.h"
 
@@ -10,15 +11,17 @@ class PR01_API AShip : public APawn
 {
 	GENERATED_BODY()
 
-public:
-	// Sets default values for this pawn's properties
-	AShip();
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-public:	
+public:
+	// Sets default values for this pawn's properties
+	AShip();
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ship Setup")
+		class UPhysicsThrusterComponent* ThrusterTEMP;
+
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
@@ -27,8 +30,17 @@ public:
 
 	void SpeedUp();
 	void SpeedDown();
+	void ThrustRightWindRollActivate();
+	void ThrustLeftWindRollActivate();
 
 private:
+
+	// Сила движков для ROLL (На крыльях корабля)
+	UPROPERTY(EditAnywhere, Category = "Ship Setup")
+		float ThrustRollStrength = 100000;
+
+	UActorComponent* RightThruster = nullptr; // Правый трастовый двигатель 
+	UPhysicsThrusterComponent* LeftThruster = nullptr; // Левый трастовый двигатель 
 
 	FVector ShipLocation;
 
