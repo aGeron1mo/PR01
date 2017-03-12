@@ -81,6 +81,13 @@ void AShip::ThrustEngineActivate(float val)
 	ShipMainSM->AddImpulse(RootDirectionArrow->GetForwardVector() * EnginePower * val);
 }
 
+void AShip::FirePrimary(float val)
+{
+	if (val) {
+		UE_LOG(LogTemp, Warning, TEXT("The fire of the main gun !"));
+	}
+}
+
 void AShip::SetupEngines()
 {
 	//	Find Thruster Engine And Setup

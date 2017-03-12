@@ -20,6 +20,7 @@ void AShipPlayerController::BeginPlay()
 		InputComp->BindAxis(FName(TEXT("AimYaw")), this, &AShipPlayerController::AimThrustYaw);
 		InputComp->BindAxis(FName(TEXT("AimPitch")), this, &AShipPlayerController::AimThrustPitch);
 		InputComp->BindAxis(FName(TEXT("AimEngineThrust")), this, &AShipPlayerController::AimEngineThrust);
+		InputComp->BindAxis(FName(TEXT("AimFirePrimary")), this, &AShipPlayerController::AimFirePrimary);
 
 	}
 	else {
@@ -28,21 +29,17 @@ void AShipPlayerController::BeginPlay()
 	if (GetPlayerShip()) {
 		UE_LOG(LogTemp, Warning, TEXT("Get Player Ship %s"), *GetPlayerShip()->GetName());
 	}
-
 }
 
 // Called every frame
 void AShipPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
-
 
 void AShipPlayerController::AimThrustRoll(float val)
 {
 	GetPlayerShip()->ThrustRollActivate(val);
-
 }
 
 void AShipPlayerController::AimThrustYaw(float val)
@@ -58,5 +55,10 @@ void AShipPlayerController::AimThrustPitch(float val)
 void AShipPlayerController::AimEngineThrust(float val)
 {
 	GetPlayerShip()->ThrustEngineActivate(val);
+}
+
+void AShipPlayerController::AimFirePrimary(float val)
+{
+	GetPlayerShip()->FirePrimary(val);
 }
 

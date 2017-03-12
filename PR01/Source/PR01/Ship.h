@@ -33,6 +33,8 @@ public:
 	void ThrustPitchActivate(float val);
 	void ThrustEngineActivate(float val);
 
+	void FirePrimary(float val);
+
 private:
 
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
