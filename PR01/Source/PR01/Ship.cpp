@@ -87,10 +87,12 @@ void AShip::ThrustEngineActivate(float val)
 
 void AShip::FirePrimary(float val)
 {
-	if (val) {
+	bool isReloaded = (FPlatformTime::Seconds() - ProjectileLastFireTime) > ProjectileTimeReloadInSec;
+	if (val && isReloaded) {
 		UE_LOG(LogTemp, Warning, TEXT("The fire of the main gun !"));
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BluePrint, RootDirectionArrow->GetComponentLocation() + RootDirectionArrow->GetComponentRotation().Vector() * 100, RootDirectionArrow->GetComponentRotation());
 		Projectile->StartProjectile(4000);
+		ProjectileLastFireTime = FPlatformTime::Seconds();
 	}
 }
 

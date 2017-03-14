@@ -48,6 +48,8 @@ private:
 		float EnginePower = 40000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
 		UClass* Projectile_BluePrint;
+	float ProjectileTimeReloadInSec = 0.2;
+	double ProjectileLastFireTime = 0;
 
 	float current_engine_val = 0; // 0 - 100 % power
 
