@@ -38,13 +38,13 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float ThrustRollStrength = 3000;
+		float ThrustRollStrength = 30000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float ThrustYawStrength = 3000;
+		float ThrustYawStrength = 30000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float ThrustPitchStrength = 3000;
+		float ThrustPitchStrength = 30000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float EnginePower = 30000;
+		float EnginePower = 40000;
 
 	float current_engine_val = 0; // 0 - 100 % power
 
@@ -58,7 +58,7 @@ private:
 	UStaticMeshComponent* ShipMainSM = nullptr;
 
 	void SetupEngines();
-	
+
 	FVector ShipLocation;
 	void Fly();
 

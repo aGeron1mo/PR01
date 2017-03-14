@@ -40,22 +40,22 @@ void AShipPlayerController::Tick(float DeltaTime)
 
 void AShipPlayerController::AimThrustRoll(float val)
 {
-	GetPlayerShip()->ThrustRollActivate(val * GetWorld()->GetTimeSeconds());
+	GetPlayerShip()->ThrustRollActivate(val);
 }
 
 void AShipPlayerController::AimThrustYaw(float val)
 {
-	GetPlayerShip()->ThrustYawActivate(val * GetWorld()->GetTimeSeconds());
+	GetPlayerShip()->ThrustYawActivate(val);
 }
 
 void AShipPlayerController::AimThrustPitch(float val)
 {
-	GetPlayerShip()->ThrustPitchActivate(val * GetWorld()->GetTimeSeconds());
+	GetPlayerShip()->ThrustPitchActivate(val);
 }
 
 void AShipPlayerController::AimEngineThrust(float val)
 {
-	GetPlayerShip()->ThrustEngineActivate(val * GetWorld()->GetTimeSeconds());
+	GetPlayerShip()->ThrustEngineActivate(val);
 }
 
 void AShipPlayerController::AimFirePrimary(float val)
