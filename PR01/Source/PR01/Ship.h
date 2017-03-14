@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Projectile.h"
 #include "PhysicsEngine/PhysicsThrusterComponent.h"
 #include "GameFramework/Pawn.h"
 #include "Ship.generated.h"
@@ -45,6 +46,8 @@ private:
 		float ThrustPitchStrength = 30000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
 		float EnginePower = 40000;
+	UPROPERTY(EditAnywhere, Category = "Ship Setup")
+		UClass* Projectile_BluePrint;
 
 	float current_engine_val = 0; // 0 - 100 % power
 

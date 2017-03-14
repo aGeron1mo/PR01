@@ -89,6 +89,8 @@ void AShip::FirePrimary(float val)
 {
 	if (val) {
 		UE_LOG(LogTemp, Warning, TEXT("The fire of the main gun !"));
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BluePrint, RootDirectionArrow->GetComponentLocation() + RootDirectionArrow->GetComponentRotation().Vector() * 100, RootDirectionArrow->GetComponentRotation());
+		Projectile->StartProjectile(4000);
 	}
 }
 
