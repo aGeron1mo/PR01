@@ -35,6 +35,7 @@ void AShipPlayerController::BeginPlay()
 void AShipPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
 }
 
 void AShipPlayerController::AimThrustRoll(float val)

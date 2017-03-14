@@ -34,9 +34,9 @@ public:
 	void ThrustEngineActivate(float val);
 
 	void FirePrimary(float val);
+	void ThrustEngineContinue();
 
 private:
-
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
 		float ThrustRollStrength = 50000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
@@ -45,6 +45,8 @@ private:
 		float ThrustPitchStrength = 50000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
 		float EnginePower = 30000;
+
+	float current_engine_val = 0;
 
 	UPhysicsThrusterComponent* RightWingRollThrust = nullptr; 
 	UPhysicsThrusterComponent* LeftWingRollThrust = nullptr; 
