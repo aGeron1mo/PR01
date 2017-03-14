@@ -80,7 +80,9 @@ void AShip::ThrustEngineActivate(float val)
 {
 //	ShipMainSM->AddImpulse(RootDirectionArrow->GetForwardVector() * EnginePower * val);
 	current_engine_val += val;
-	ShipMainSM->AddImpulse(RootDirectionArrow->GetForwardVector() * EnginePower * current_engine_val);
+	current_engine_val = FMath::Clamp<float>(current_engine_val, 0, 100); // 0 - 100 % Power
+
+	ShipMainSM->AddImpulse(RootDirectionArrow->GetForwardVector() * EnginePower * current_engine_val / 100);
 }
 
 void AShip::FirePrimary(float val)

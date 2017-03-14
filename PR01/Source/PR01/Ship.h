@@ -38,15 +38,15 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float ThrustRollStrength = 50000;
+		float ThrustRollStrength = 3000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float ThrustYawStrength = 50000;
+		float ThrustYawStrength = 3000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float ThrustPitchStrength = 50000;
+		float ThrustPitchStrength = 3000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
 		float EnginePower = 30000;
 
-	float current_engine_val = 0;
+	float current_engine_val = 0; // 0 - 100 % power
 
 	UPhysicsThrusterComponent* RightWingRollThrust = nullptr; 
 	UPhysicsThrusterComponent* LeftWingRollThrust = nullptr; 
