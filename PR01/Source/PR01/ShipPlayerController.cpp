@@ -22,7 +22,7 @@ void AShipPlayerController::BeginPlay()
 		InputComp->BindAxis(FName(TEXT("AimEngineThrust")), this, &AShipPlayerController::AimEngineThrust);
 		InputComp->BindAxis(FName(TEXT("AimFirePrimary")), this, &AShipPlayerController::AimFirePrimary);
 
-		InputComp->BindAction(FName(TEXT("AimBurst")), EInputEvent::IE_DoubleClick, this, &AShipPlayerController::AimBurst);
+		InputComp->BindAction(FName(TEXT("AimBoost")), EInputEvent::IE_DoubleClick, this, &AShipPlayerController::AimBurst);
 
 	}
 	else {
@@ -67,6 +67,6 @@ void AShipPlayerController::AimFirePrimary(float val)
 
 void AShipPlayerController::AimBurst()
 {
-	GetPlayerShip()->Burst();
+	GetPlayerShip()->Boost();
 }
 
