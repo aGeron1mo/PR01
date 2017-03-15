@@ -27,6 +27,8 @@ private:
 	void AimThrustPitch(float val);
 	void AimEngineThrust(float val);
 	void AimFirePrimary(float val);
+	void AimBurst();
+
 
 	UInputComponent* InputComp = nullptr;
 

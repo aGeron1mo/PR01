@@ -22,6 +22,8 @@ void AShipPlayerController::BeginPlay()
 		InputComp->BindAxis(FName(TEXT("AimEngineThrust")), this, &AShipPlayerController::AimEngineThrust);
 		InputComp->BindAxis(FName(TEXT("AimFirePrimary")), this, &AShipPlayerController::AimFirePrimary);
 
+		InputComp->BindAction(FName(TEXT("AimBurst")), EInputEvent::IE_DoubleClick, this, &AShipPlayerController::AimBurst);
+
 	}
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Input component not found"));
@@ -61,5 +63,10 @@ void AShipPlayerController::AimEngineThrust(float val)
 void AShipPlayerController::AimFirePrimary(float val)
 {
 	GetPlayerShip()->FirePrimary(val);
+}
+
+void AShipPlayerController::AimBurst()
+{
+	GetPlayerShip()->Burst();
 }
 

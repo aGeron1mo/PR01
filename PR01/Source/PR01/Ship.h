@@ -35,7 +35,7 @@ public:
 	void ThrustEngineActivate(float val);
 
 	void FirePrimary(float val);
-	void ThrustEngineContinue();
+	void Burst();
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
@@ -45,9 +45,12 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
 		float ThrustPitchStrength = 30000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float EnginePower = 40000;
+		float EnginePower = 30000;
+	UPROPERTY(EditAnywhere, Category = "Ship Setup")
+		float BurstPower = 50000000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
 		UClass* Projectile_BluePrint;
+
 	float ProjectileTimeReloadInSec = 0.2;
 	double ProjectileLastFireTime = 0;
 
@@ -59,12 +62,14 @@ private:
 	UPhysicsThrusterComponent* NoseYawThrust = nullptr;
 	UPhysicsThrusterComponent* TailPitchThrust = nullptr;
 	UPhysicsThrusterComponent* TailYawThrust = nullptr;
+
 	UArrowComponent* RootDirectionArrow = nullptr;
 	UStaticMeshComponent* ShipMainSM = nullptr;
 
 	void SetupEngines();
 
 	FVector ShipLocation;
+
 	void Fly();
 
 

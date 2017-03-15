@@ -81,8 +81,9 @@ void AShip::ThrustEngineActivate(float val)
 //	ShipMainSM->AddImpulse(RootDirectionArrow->GetForwardVector() * EnginePower * val);
 	current_engine_val += val;
 	current_engine_val = FMath::Clamp<float>(current_engine_val, 0, 100); // 0 - 100 % Power
-
-	ShipMainSM->AddImpulse(RootDirectionArrow->GetForwardVector() * EnginePower * current_engine_val / 100);
+	if (current_engine_val) {
+		ShipMainSM->AddImpulse(RootDirectionArrow->GetForwardVector() * EnginePower * current_engine_val / 100);
+	}
 }
 
 void AShip::FirePrimary(float val)
@@ -94,6 +95,13 @@ void AShip::FirePrimary(float val)
 		Projectile->StartProjectile(4000);
 		ProjectileLastFireTime = FPlatformTime::Seconds();
 	}
+}
+
+void AShip::Burst()
+{
+	ShipMainSM->AddImpulse(RootDirectionArrow->GetForwardVector() * BurstPower);
+	UE_LOG(LogTemp, Warning, TEXT("Burst !"));
+
 }
 
 void AShip::SetupEngines()
@@ -109,6 +117,8 @@ void AShip::SetupEngines()
 		if (NameThruster.Contains(TEXT("NoseYawThrust"))) { NoseYawThrust = Cast<UPhysicsThrusterComponent>(thr); }
 		if (NameThruster.Contains(TEXT("TailPitchThrust"))) { TailPitchThrust = Cast<UPhysicsThrusterComponent>(thr); }
 		if (NameThruster.Contains(TEXT("TailYawThrust"))) { TailYawThrust = Cast<UPhysicsThrusterComponent>(thr); }
+//		if (NameThruster.Contains(TEXT("MainEngine"))) { MainEngine = Cast<UPhysicsThrusterComponent>(thr); }
+			//MainEngine
 	}
 	if (!RightWingRollThrust) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP SHIP THRUSTER NAME: RightWingRollThrust"));}
 	if (!LeftWingRollThrust) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP SHIP THRUSTER NAME: LeftWingRollThrust")); }
@@ -116,6 +126,7 @@ void AShip::SetupEngines()
 	if (!NoseYawThrust) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP SHIP THRUSTER NAME: NoseYawThrust")); }
 	if (!TailPitchThrust) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP SHIP THRUSTER NAME: TailPitchThrust")); }
 	if (!TailYawThrust) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP SHIP THRUSTER NAME: TailYawThrust")); }
+//	if (!MainEngine) { UE_LOG(LogTemp, Error, TEXT("ERROR! NO FIND AND SETUP MAIN ENGINE: MainEngine")); }
 
 	//	Find Arrow Root Direction
 	TArray<UActorComponent*> Arrows;
