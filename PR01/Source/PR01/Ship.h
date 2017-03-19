@@ -7,6 +7,8 @@
 #include "GameFramework/Pawn.h"
 #include "Ship.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FEventhShip);
+
 UCLASS()
 class PR01_API AShip : public APawn
 {
@@ -37,6 +39,9 @@ public:
 	void FirePrimary(float val);
 	void Boost();
 
+	UPROPERTY(BlueprintAssignable)
+		FEventhShip OnBoost;
+
 private:
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
 		float ThrustRollStrength = 30000;
@@ -45,11 +50,13 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
 		float ThrustPitchStrength = 30000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float EnginePower = 30000;
+		float EnginePower = 45000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float BurstPower = 50000000;
+		float BoostPower = 50000000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
 		UClass* Projectile_BluePrint;
+
+
 
 	float ProjectileTimeReloadInSec = 0.2;
 	double ProjectileLastFireTime = 0;

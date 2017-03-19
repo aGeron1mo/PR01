@@ -83,6 +83,7 @@ void AShip::ThrustEngineActivate(float val)
 	current_engine_val = FMath::Clamp<float>(current_engine_val, 0, 100); // 0 - 100 % Power
 	if (current_engine_val) {
 		ShipMainSM->AddImpulse(RootDirectionArrow->GetForwardVector() * EnginePower * current_engine_val / 100);
+		//ShipMainSM->SetPhysicsLinearVelocity(RootDirectionArrow->GetForwardVector() * EnginePower * current_engine_val / 100);
 	}
 }
 
@@ -100,8 +101,9 @@ void AShip::FirePrimary(float val)
 
 void AShip::Boost()
 {
-	ShipMainSM->AddImpulse(RootDirectionArrow->GetForwardVector() * BurstPower);
+	ShipMainSM->AddImpulse(RootDirectionArrow->GetForwardVector() * BoostPower);
 	UE_LOG(LogTemp, Warning, TEXT("Burst !"));
+	OnBoost.Broadcast();
 
 }
 
