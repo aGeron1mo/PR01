@@ -42,6 +42,10 @@ public:
 	UPROPERTY(BlueprintAssignable)
 		FEventhShip OnBoost;
 
+	UPROPERTY(BlueprintAssignable)
+		FEventhShip OnMainEngine;
+
+
 private:
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
 		float ThrustRollStrength = 30000;
