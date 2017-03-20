@@ -48,15 +48,15 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float ThrustRollStrength = 30000;
+		float ThrustRollStrength = 500000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float ThrustYawStrength = 30000;
+		float ThrustYawStrength = 500000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float ThrustPitchStrength = 30000;
+		float ThrustPitchStrength = 500000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float EnginePower = 45000;
+		float EnginePower = 380000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
-		float BoostPower = 50000000;
+		float BoostPower = 500000000;
 	UPROPERTY(EditAnywhere, Category = "Ship Setup")
 		UClass* Projectile_BluePrint;
 
