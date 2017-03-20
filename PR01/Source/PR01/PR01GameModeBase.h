@@ -12,8 +12,7 @@ UCLASS()
 class PR01_API APR01GameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
-	
-	
-	
+
+
 };
+
