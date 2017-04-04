@@ -22,7 +22,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void StartProjectile(float Speed);
+	void Fire(float Speed);
 
 
 private:

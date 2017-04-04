@@ -95,7 +95,7 @@ void AShip::FirePrimary(float val)
 		UE_LOG(LogTemp, Warning, TEXT("The fire of the main gun !"));
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(Projectile_BluePrint, RootDirectionArrow->GetComponentLocation() + RootDirectionArrow->GetComponentRotation().Vector() * 500, RootDirectionArrow->GetComponentRotation());
 		Projectile->SetLifeSpan(2);
-		Projectile->StartProjectile(10000);
+		Projectile->Fire(10000);
 		ProjectileLastFireTime = FPlatformTime::Seconds();
 	}
 }
